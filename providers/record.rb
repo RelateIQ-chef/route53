@@ -3,6 +3,8 @@ action :create do
   require 'fog/aws/dns'
   require 'nokogiri'
 
+  Excon.defaults[:ssl_verify_peer] = false
+
   def aws
     {
     :provider => 'AWS',
