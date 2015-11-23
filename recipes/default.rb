@@ -41,6 +41,15 @@ elsif node['platform_family'] == 'rhel'
    xslt.run_action( :install )
 end
 
+# because the constraint on mime-types in >= 0 it resolves to 3.0.0 
+# which requires ruby 2.0 which conflicts with existing ruby 
+# versions installed by omnibus for chef-client v 11.16.4
+# so to fix this we download v 2.6.x of mime-types. 
+chef_gem "mime-types" do 
+  action :install 
+  version node[:mime_types][:version] 
+end 
+
 chef_gem "fog" do
   action :install
   version node['route53']['fog_version']
