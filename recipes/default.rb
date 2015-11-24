@@ -50,10 +50,14 @@ chef_gem "mime-types" do
   version node[:mime_types][:version] 
 end 
 
+Gem.clear_paths
+require 'mime-types' 
+
 chef_gem "fog" do
   action :install
   version node['route53']['fog_version']
+  retries 1 
 end
 
-require 'rubygems'
-Gem.clear_paths
+#Gem.clear_paths
+#require 'rubygems'
