@@ -41,7 +41,7 @@ elsif node['platform_family'] == 'rhel'
    xslt.run_action( :install )
 end
 
-# because the constraint on mime-types in >= 0 it resolves to 3.0.0 
+# because the constraint on mime-types is >= 0 it resolves to 3.0.0 
 # which requires ruby 2.0 which conflicts with existing ruby 
 # versions installed by omnibus for chef-client v 11.16.4
 # so to fix this we download v 2.6.x of mime-types. 
@@ -50,8 +50,18 @@ chef_gem "mime-types" do
   version node[:mime_types][:version] 
 end 
 
+# because the constraint on nokogiri is >= 1.5.11 it resolves to 1.7.0.1 
+# which requires ruby 2.1 which conflicts with existing ruby 
+# versions installed by omnibus for chef-client v 11.16
+# so to fix this we download v 1.6.8.1 of nokogiri. 
+chef_gem "nokogiri" do
+  action :install
+  version node[:nokogiri][:version]
+end
+
 Gem.clear_paths
 require 'mime-types' 
+require 'nokogiri' 
 
 chef_gem "fog" do
   action :install
