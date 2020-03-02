@@ -9,3 +9,5 @@ end
 
 default[:mime_types][:version]  = '1.25.1'
 default[:nokogiri][:version]  = '1.5.11'
+default[:public_suffix][:version] = '3.1.1'
+default[:launchy][:version] = '2.4.3'
