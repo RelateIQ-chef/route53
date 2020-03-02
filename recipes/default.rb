@@ -59,9 +59,21 @@ chef_gem "nokogiri" do
   version node[:nokogiri][:version]
 end
 
+chef_gem "public_suffix" do
+  action :install
+  version node[:public_suffix][:version]
+end
+
+chef_gem "launchy" do
+  action :install
+  version node[:launchy][:version]
+end
+
 Gem.clear_paths
 require 'mime-types' 
-require 'nokogiri' 
+require 'nokogiri'
+require 'public_suffix'
+require 'launchy'
 
 chef_gem "fog" do
   action :install
